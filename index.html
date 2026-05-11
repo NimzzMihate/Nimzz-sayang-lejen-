@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Nimzz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #faf9f6;
+      font-family: 'Space Mono', monospace;
+      color: #1a1a1a;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      margin: 0;
+      transition: background 0.4s ease;
+    }
+
+    .card {
+      max-width: 720px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      background: #ffffff;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.03), 0 8px 16px rgba(0, 0, 0, 0.04);
+      border-radius: 2.5rem;
+      padding: 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2.2rem;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
+    .card:hover {
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.06), 0 10px 20px rgba(0, 0, 0, 0.04);
+      transform: translateY(-2px);
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      color: #555;
+      border-bottom: 1px solid #eaeaea;
+      padding-bottom: 1rem;
+    }
+
+    .dot-group {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #d0d0d0;
+      transition: all 0.3s ease;
+    }
+
+    .dot:nth-child(1) {
+      background: #ff5f57;
+    }
+    .dot:nth-child(2) {
+      background: #febc2e;
+    }
+    .dot:nth-child(3) {
+      background: #28c840;
+    }
+
+    .typing-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.2em;
+      background: #1a1a1a;
+      margin-left: 2px;
+      vertical-align: text-bottom;
+      animation: blink 0.9s step-end infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .nimzz-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+    }
+
+    .typed-text {
+      display: inline-block;
+      min-width: 2px;
+    }
+
+    .sub-line {
+      color: #4b4b4b;
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      margin-top: 0.25rem;
+      opacity: 0;
+      animation: fadeSlideUp 0.6s ease forwards;
+      animation-delay: 2.2s;
+    }
+
+    @keyframes fadeSlideUp {
+      0% {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .description {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #2e2e2e;
+      background: #f4f4f2;
+      padding: 1.5rem 1.8rem;
+      border-radius: 1.8rem;
+      transition: background 0.3s;
+      opacity: 0;
+      animation: fadeSlideUp 0.6s ease forwards;
+      animation-delay: 2.8s;
+    }
+
+    .description i {
+      font-style: italic;
+      color: #1a1a1a;
+    }
+
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      opacity: 0;
+      animation: fadeSlideUp 0.6s ease forwards;
+      animation-delay: 3.4s;
+    }
+
+    .btn {
+      background: transparent;
+      border: 1.5px solid #1a1a1a;
+      padding: 0.8rem 1.8rem;
+      border-radius: 3rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #1a1a1a;
+      background: #fff;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .btn:hover {
+      background: #1a1a1a;
+      color: #faf9f6;
+      border-color: #1a1a1a;
+      transform: scale(1.03);
+    }
+
+    .btn.primary {
+      background: #1a1a1a;
+      color: white;
+      border-color: #1a1a1a;
+    }
+
+    .btn.primary:hover {
+      background: #333;
+      border-color: #333;
+      color: white;
+    }
+
+    .footer-note {
+      margin-top: 0.5rem;
+      font-size: 0.75rem;
+      color: #8a8a8a;
+      letter-spacing: 0.03em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #eaeaea;
+      padding-top: 1.2rem;
+      opacity: 0;
+      animation: fadeSlideUp 0.6s ease forwards;
+      animation-delay: 3.8s;
+    }
+
+    @media (max-width: 500px) {
+      .card {
+        padding: 2.2rem 1.5rem;
+      }
+      .nimzz-title {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="top-bar">
+      <div class="dot-group">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+      <span>nimzz</span>
+    </div>
+
+    <div>
+      <div class="nimzz-title">
+        <span class="typed-text" id="typed-name"></span><span class="typing-cursor" id="cursor"></span>
+      </div>
+      <div class="sub-line">
+        clean • smooth • funny
+      </div>
+    </div>
+
+    <div class="description" id="desc-text">
+      <span id="dynamic-desc"></span><span class="typing-cursor" id="desc-cursor" style="background:#2e2e2e"></span>
+    </div>
+
+    <div class="button-group">
+      <button class="btn primary" id="exploreBtn">Tes ajah</button>
+      <button class="btn" id="anotherBtn">nimzz</button>
+      <button class="btn" id="resetTypingBtn">↺ ketik ulang</button>
+    </div>
+
+    <div class="footer-note">
+      <span>Nimzz sayang lejen</span>
+      <span>● nimzz</span>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const nameString = "Nimzz";
+      const descString = "Lowkey pengen banget pamerin lo ke dunia dan bilang kalau lo punya gue. Tapi highkey sadar, ending cerita kita nggak bakal pernah dapet applause dari mereka.";
+
+      const typedNameElement = document.getElementById('typed-name');
+      const cursorElement = document.getElementById('cursor');
+      const dynamicDescElement = document.getElementById('dynamic-desc');
+      const descCursorElement = document.getElementById('desc-cursor');
+
+      let nameTypingTimer = null;
+      let descTypingTimer = null;
+      let nameIndex = 0;
+      let descIndex = 0;
+
+      function clearNameTyping() {
+        if (nameTypingTimer) {
+          clearTimeout(nameTypingTimer);
+          nameTypingTimer = null;
+        }
+      }
+
+      function clearDescTyping() {
+        if (descTypingTimer) {
+          clearTimeout(descTypingTimer);
+          descTypingTimer = null;
+        }
+      }
+
+      function resetAllTyping() {
+        clearNameTyping();
+        clearDescTyping();
+        
+        typedNameElement.textContent = '';
+        dynamicDescElement.textContent = '';
+        nameIndex = 0;
+        descIndex = 0;
+
+        cursorElement.style.display = 'inline-block';
+        descCursorElement.style.display = 'inline-block';
+
+        startNameTyping();
+        setTimeout(() => {
+          startDescTyping();
+        }, 1600);
+      }
+
+      function humanizeDelay(baseMs) {
+        return baseMs + Math.floor(Math.random() * 140);
+      }
+
+      function typeName() {
+        if (nameIndex < nameString.length) {
+          typedNameElement.textContent += nameString.charAt(nameIndex);
+          nameIndex++;
+          const nextDelay = humanizeDelay(100);
+          nameTypingTimer = setTimeout(typeName, nextDelay);
+        } else {
+          if (cursorElement) {
+            cursorElement.style.display = 'none';
+          }
+          nameTypingTimer = null;
+        }
+      }
+
+      function typeDescription() {
+        if (descIndex < descString.length) {
+          dynamicDescElement.textContent += descString.charAt(descIndex);
+          descIndex++;
+          const nextDelay = humanizeDelay(35);
+          descTypingTimer = setTimeout(typeDescription, nextDelay);
+        } else {
+          if (descCursorElement) {
+            descCursorElement.style.display = 'none';
+          }
+          descTypingTimer = null;
+        }
+      }
+
+      function startNameTyping() {
+        clearNameTyping();
+        if (cursorElement) cursorElement.style.display = 'inline-block';
+        nameTypingTimer = setTimeout(typeName, 300);
+      }
+
+      function startDescTyping() {
+        clearDescTyping();
+        if (descCursorElement) descCursorElement.style.display = 'inline-block';
+        descTypingTimer = setTimeout(typeDescription, 200);
+      }
+
+      window.addEventListener('load', () => {
+        startNameTyping();
+        setTimeout(() => {
+          startDescTyping();
+        }, 1400);
+      });
+
+      document.getElementById('resetTypingBtn').addEventListener('click', (e) => {
+        e.preventDefault();
+        resetAllTyping();
+      });
+
+      document.getElementById('exploreBtn').addEventListener('click', (e) => {
+        e.preventDefault();
+        const descEl = document.getElementById('desc-text');
+        descEl.style.transition = 'background 0.3s';
+        descEl.style.background = '#e6e4dd';
+        setTimeout(() => {
+          descEl.style.background = '#f4f4f2';
+        }, 350);
+      });
+
+      document.getElementById('anotherBtn').addEventListener('click', (e) => {
+        e.preventDefault();
+        const footer = document.querySelector('.footer-note span:last-child');
+        const originalText = footer.textContent;
+        footer.textContent = '● tersambung';
+        footer.style.transition = 'color 0.2s';
+        footer.style.color = '#1a1a1a';
+        setTimeout(() => {
+          footer.textContent = originalText;
+          footer.style.color = '#8a8a8a';
+        }, 1200);
+      });
+
+      window.addEventListener('beforeunload', () => {
+        clearNameTyping();
+        clearDescTyping();
+      });
+    })();
+  </script>
+</body>
+</html>
